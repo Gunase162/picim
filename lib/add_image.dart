@@ -90,21 +90,23 @@ class _AddImageState extends State<AddImage> {
   }
 
   chooseImage() async {
+    // ignore: deprecated_member_use
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
-      _image.add(File(pickedFile.path));
+      _image.add(File(pickedFile !.path));
     });
-    if (pickedFile.path == null) retrieveLostData();
+    if (pickedFile !.path == null) retrieveLostData();
   }
 
   Future<void> retrieveLostData() async {
+    // ignore: deprecated_member_use
     final LostData response = await picker.getLostData();
     if (response.isEmpty) {
       return;
     }
     if (response.file != null) {
       setState(() {
-        _image.add(File(response.file.path));
+        _image.add(File(response.file !.path));
       });
     } else {
       print(response.file);
